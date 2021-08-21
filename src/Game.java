@@ -9,11 +9,12 @@ public class Game extends Canvas implements Runnable
 {	
 	private static final long serialVersionUID = 1L; // Auto create by java.awt.Canvas:
 	
-	private final int SCALE = 1; // Escala da resolução (aqui aumenta o tamanho da janela sem alterar a resolução).
-	private final int WIDTH = 640 * SCALE; // Largura da resolução.
-	private final int HEIGHT = 480 * SCALE; // Altura da resolução.
+	private final int SCALE = 1; // Escala da resolução (aqui aumenta a escala dos objetos sem alterar a resolução).
+	private final int WIDTH = 640 * SCALE; // Largura da janela.
+	private final int HEIGHT = 480 * SCALE; // Altura da janela.
 	
 	private BufferedImage background = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB); // Imagem de fundo
+	private Player player = new Player(250, HEIGHT-20); // Instancia do player
 	
 	public Game()
 	{
@@ -48,7 +49,10 @@ public class Game extends Canvas implements Runnable
 		gp = getBufferStrategy().getDrawGraphics();
 		gp.drawImage(background, 0, 0, WIDTH, HEIGHT, null);
 		
-		// Renderiza os buffers
+		// Renderiza o player
+		player.render(gp);
+		
+		// Mostra o que foi renderizado
 		getBufferStrategy().show();
 	}
 	
