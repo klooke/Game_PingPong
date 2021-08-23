@@ -1,48 +1,50 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Player 
+public class Player
 {
-	private final int WIDTH = 100; // Largura da linha
-	private final int HEIGHT = 10; // Altura da linha
+	private final int WIDTH = 100;
+	private final int HEIGHT = 10;
+	private final int SPEED = 10;
+
+	private int posX;
+	private int posY;
+	private PlayerController controller;
+	private int contactLeft;
+	private int contactRight;
+	private int direction;
 	
-	private int posX = 0; // Posição X da linha
-	private int posY = 0; // Posição Y da linha
-	private int speed = 10; // Velocidade da movimentação
-	
-	// Construtor para iniciar o player em uma posição especifica
-	public Player(int x, int y)
+	public Player()
 	{
-		posX = x;
-		posY = y;
+		posX = 250;
+		posY = Game.HEIGHT - 20;
+		controller = new PlayerController(this);
 	}
 	
-	// Comando para renderizar o player, recebe o graphics da janela principal
-	public void render(Graphics gp)
+	public PlayerController getController()
 	{
-		gp.setColor(Color.WHITE); // Cor branca
-		gp.fillRect(posX, posY, WIDTH, HEIGHT); // Linha horizontal
+		return controller;
 	}
 	
-	// Comando para movimentar o player a direita.
-	public void moveRight()
+	public void render(Graphics graphic)
 	{
-		int x = posX + (WIDTH + 10); // Posição final do lado direito da linha
-		
-		if (x < Game.WIDTH) // Verifica se chegou ao limite
-		{
-			posX += (1 * speed); // Multiplica a direção com a velocidade da movimentação			
-		}
+		graphic.setColor(Color.WHITE);
+		graphic.fillRect(posX, posY, WIDTH, HEIGHT);
+		contactLeft = posX - 10;
+		contactRight = posX + (WIDTH + 10);
 	}
 	
-	// Comando para movimentar o player a esquerda.
-	public void moveLeft()
+	public void moveX(short direction)
 	{
-		int x = posX - 10; // Posição final do lado esquerdo da linha
-		
-		if (x > 0) // Verifica se chegou ao limite
-		{
-			posX -= (1 * speed); // Multiplica a direção com a velocidade da movimentação			
-		}
+		this.direction = direction;
+		if (onLimits())
+			posX += (direction * SPEED);
+	}
+	
+	private boolean onLimits()
+	{
+		boolean limitRight = direction == Game.DIR_RIGHT && contactRight < Game.WIDTH;
+		boolean limitLeft = direction == Game.DIR_LEFT && contactLeft > 0;
+		return limitRight || limitLeft;
 	}
 }
