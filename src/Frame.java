@@ -8,7 +8,7 @@ public class Frame extends JFrame
 	
 	public Frame(Canvas canvas)
 	{
-		this.setTitle(Game.NAME_TITLE);
+		this.setTitle(Game.FRAME_TITLE);
 		this.add(canvas);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

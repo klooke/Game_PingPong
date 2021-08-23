@@ -9,7 +9,7 @@ public class Game extends Canvas implements Runnable
 	public static final int FRAME_SCALE = 1;
 	public static final int FRAME_WIDTH = 640*FRAME_SCALE;
 	public static final int FRAME_HEIGHT = 480*FRAME_SCALE;
-	public static final String NAME_TITLE = "Ping Pong";
+	public static final String FRAME_TITLE = "Ping Pong";
 	public static final short DIR_LEFT = -1;
 	public static final short DIR_RIGHT = 1;
 	private static final long serialVersionUID = 1L;

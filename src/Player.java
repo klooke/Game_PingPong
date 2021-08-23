@@ -1,17 +1,15 @@
 public class Player extends Entity
 {	
 	private PlayerController controller;
-	private int contactLeft;
-	private int contactRight;
 	private int direction;
 	
 	public Player()
 	{
 		width = 100;
 		height = 10;
+		posX = (Game.FRAME_WIDTH / 2) - (width / 2);
+		posY = Game.FRAME_HEIGHT - (height*2);
 		speed = 10;
-		posX = (Game.FRAME_WIDTH / 2) - 50;
-		posY = Game.FRAME_HEIGHT - 20;
 		controller = new PlayerController(this);
 	}
 	
@@ -29,15 +27,8 @@ public class Player extends Entity
 	
 	private boolean onLimits()
 	{
-		updateLimits();
-		boolean limitRight = direction == Game.DIR_RIGHT && contactRight < Game.FRAME_WIDTH;
-		boolean limitLeft = direction == Game.DIR_LEFT && contactLeft > 0;
-		return limitRight || limitLeft;
-	}
-	
-	public void updateLimits()
-	{
-		contactLeft = posX - 10;
-		contactRight = posX + (width + 10);
+		boolean onLimitRight = (direction == Game.DIR_RIGHT) && (bounds.getMaxX() < (Game.FRAME_WIDTH - 20));
+		boolean onLimitLeft = (direction == Game.DIR_LEFT) && (bounds.getMinX() > 10);
+		return onLimitRight || onLimitLeft;
 	}
 }
