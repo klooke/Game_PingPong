@@ -12,10 +12,19 @@ public class Ball extends Entity
 		height = 10;
 		posX = (Game.FRAME_WIDTH / 2) - (width / 2);
 		posY = (Game.FRAME_HEIGHT / 2) - (height /2);
-		speed = 0.1;		
-		directionAngle = new Random().nextInt(359);
+		speed = 0.1;
+		randomDirection();
+	}
+	
+	private void randomDirection()
+	{
+		directionAngle = new Random().nextInt(80) + 40;
 		directionX = Math.cos(Math.toRadians(directionAngle));
-		directionY = Math.sin(Math.toRadians(directionAngle));
+		
+		if (directionY >= 0)
+			directionY = Math.sin(Math.toRadians(directionAngle));
+		else
+			directionY = Math.sin(Math.toRadians(-directionAngle));
 	}
 	
 	public void update()
@@ -39,7 +48,11 @@ public class Ball extends Entity
 	private boolean isCollideToEntities()
 	{
 		if(bounds.intersects(Game.getPlayer().bounds) || bounds.intersects(Game.getEnemy().bounds))
+		{
+			randomDirection();
 			return true;
+		}
+		
 		return false;
 	}
 	

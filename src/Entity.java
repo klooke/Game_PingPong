@@ -10,6 +10,7 @@ public class Entity
 	protected int height;
 	protected double speed;	
 	protected Rectangle bounds;
+	protected int direction;
 	
 	public void render(Graphics graphic)
 	{

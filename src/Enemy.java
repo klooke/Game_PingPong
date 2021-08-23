@@ -2,11 +2,12 @@ public class Enemy extends Entity
 {	
 	public Enemy()
 	{
-		width = 100;
+		width = (Game.FRAME_WIDTH / 5);
 		height = 10;
 		posX = (Game.FRAME_WIDTH / 2) - (width / 2);
 		posY = height;
-		speed = 10;
+		speed = 1;
+	}
 	
 	public void update()
 	{

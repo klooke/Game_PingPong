@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable
 {	
-	public static final int FRAME_SCALE = 1;
-	public static final int FRAME_WIDTH = 640*FRAME_SCALE;
-	public static final int FRAME_HEIGHT = 480*FRAME_SCALE;
+	public static final int FRAME_SCALE = 2;
+	public static final int FRAME_WIDTH = 152*FRAME_SCALE;
+	public static final int FRAME_HEIGHT = 274*FRAME_SCALE;
 	public static final String FRAME_TITLE = "Ping Pong";
 	public static final short DIR_LEFT = -1;
 	public static final short DIR_RIGHT = 1;
@@ -56,6 +56,7 @@ public class Game extends Canvas implements Runnable
 		{
 			render();
 			ball.update();
+			enemy.update();
 		}	
 	}
 	
@@ -78,6 +79,11 @@ public class Game extends Canvas implements Runnable
 	public static Enemy getEnemy()
 	{
 		return enemy;
+	}
+	
+	public static Ball getBall()
+	{
+		return ball;
 	}
 	
 	public static void resetBall()
