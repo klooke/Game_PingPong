@@ -1,14 +1,5 @@
-import java.awt.Color;
-import java.awt.Graphics;
-
-public class Player
-{
-	private final int WIDTH = 100;
-	private final int HEIGHT = 10;
-	private final int SPEED = 10;
-
-	private int posX;
-	private int posY;
+public class Player extends Entity
+{	
 	private PlayerController controller;
 	private int contactLeft;
 	private int contactRight;
@@ -16,8 +7,11 @@ public class Player
 	
 	public Player()
 	{
+		width = 100;
+		height = 10;
+		speed = 10;
 		posX = 250;
-		posY = Game.HEIGHT - 20;
+		posY = Game.FRAME_HEIGHT - 20;
 		controller = new PlayerController(this);
 	}
 	
@@ -26,25 +20,24 @@ public class Player
 		return controller;
 	}
 	
-	public void render(Graphics graphic)
-	{
-		graphic.setColor(Color.WHITE);
-		graphic.fillRect(posX, posY, WIDTH, HEIGHT);
-		contactLeft = posX - 10;
-		contactRight = posX + (WIDTH + 10);
-	}
-	
 	public void moveX(short direction)
 	{
 		this.direction = direction;
 		if (onLimits())
-			posX += (direction * SPEED);
+			posX += (direction * speed);
 	}
 	
 	private boolean onLimits()
 	{
-		boolean limitRight = direction == Game.DIR_RIGHT && contactRight < Game.WIDTH;
+		updateLimits();
+		boolean limitRight = direction == Game.DIR_RIGHT && contactRight < Game.FRAME_WIDTH;
 		boolean limitLeft = direction == Game.DIR_LEFT && contactLeft > 0;
 		return limitRight || limitLeft;
+	}
+	
+	public void updateLimits()
+	{
+		contactLeft = posX - 10;
+		contactRight = posX + (width + 10);
 	}
 }
