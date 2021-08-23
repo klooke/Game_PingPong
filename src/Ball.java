@@ -12,7 +12,7 @@ public class Ball extends Entity
 		height = 10;
 		posX = (Game.FRAME_WIDTH / 2) - (width / 2);
 		posY = (Game.FRAME_HEIGHT / 2) - (height /2);
-		speed = 0.1;
+		speed = 0.07;
 		randomDirection();
 	}
 	

@@ -12,10 +12,12 @@ public class PlayerController implements KeyListener
 	
 	public void keyPressed(KeyEvent e)
 	{
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) 
+		int key = e.getKeyCode();
+		
+		if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) 
 			player.moveX(Game.DIR_LEFT);
 		
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+		if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D)
 			player.moveX(Game.DIR_RIGHT);		
 	}
 

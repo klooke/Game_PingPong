@@ -41,7 +41,7 @@ public class Game extends Canvas implements Runnable
 	{
 		createBuffer();
 		requestFocus();
-		update();
+		loop();
 	}
 	
 	private void createBuffer()
@@ -50,7 +50,7 @@ public class Game extends Canvas implements Runnable
 		buffer = getBufferStrategy();		
 	}
 	
-	private void update()
+	private void loop()
 	{
 		while(true)
 		{
