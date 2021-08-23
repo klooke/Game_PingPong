@@ -17,6 +17,7 @@ public class Game extends Canvas implements Runnable
 	private BufferedImage background;
 	private Player player;
 	private Enemy enemy;
+	private Ball ball;
 	private BufferStrategy buffer;
 	
 	public static void main(String[] args)
@@ -33,6 +34,7 @@ public class Game extends Canvas implements Runnable
 		player = new Player();
 		addKeyListener(player.getController());
 		enemy = new Enemy();
+		ball = new Ball();
 	}
 	
 	public void run() 
@@ -61,6 +63,7 @@ public class Game extends Canvas implements Runnable
 		graphic.drawImage(background, 0, 0, null);		
 		player.render(graphic);
 		enemy.render(graphic);
+		ball.render(graphic);
 		buffer.show();
 	}
 }
