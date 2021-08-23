@@ -21,14 +21,7 @@ public class Player extends Entity
 	public void moveX(short direction)
 	{
 		this.direction = direction;
-		if(onLimits())
+		if(isCollideToWall())
 			posX += (direction * speed);
-	}
-	
-	private boolean onLimits()
-	{
-		boolean onLimitRight = (direction == Game.DIR_RIGHT) && (bounds.getMaxX() < (Game.FRAME_WIDTH - 20));
-		boolean onLimitLeft = (direction == Game.DIR_LEFT) && (bounds.getMinX() > 10);
-		return onLimitRight || onLimitLeft;
 	}
 }

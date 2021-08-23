@@ -36,14 +36,6 @@ public class Ball extends Entity
 			Game.resetBall();
 	}
 	
-	private boolean isCollideToWall()
-	{
-		if(bounds.getMinX() <= 0 || bounds.getMaxX() >= Game.FRAME_WIDTH)
-			return true;
-		
-		return false;
-	}
-	
 	private boolean isCollideToEntities()
 	{
 		if(bounds.intersects(Game.getPlayer().bounds) || bounds.intersects(Game.getEnemy().bounds))
@@ -53,13 +45,12 @@ public class Ball extends Entity
 	
 	private boolean isOutLimits()
 	{
-		System.out.println("X: " + directionX + " Y: " + directionY);
-		if (bounds.getCenterY() >= Game.FRAME_HEIGHT)
+		if(bounds.getCenterY() >= Game.FRAME_HEIGHT)
 		{
 			System.out.println("Ponto do inimigo!");
 			return true;
 		}
-		else if (bounds.getCenterY() <= 0)
+		else if(bounds.getCenterY() <= 0)
 		{
 			System.out.println("Ponto do jogador!");
 			return true;
