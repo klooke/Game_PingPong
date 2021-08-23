@@ -15,9 +15,9 @@ public class Game extends Canvas implements Runnable
 	private static final long serialVersionUID = 1L;
 	
 	private BufferedImage background;
-	private Player player;
-	private Enemy enemy;
-	private Ball ball;
+	private static Player player;
+	private static Enemy enemy;
+	private static Ball ball;
 	private BufferStrategy buffer;
 	
 	public static void main(String[] args)
@@ -53,7 +53,10 @@ public class Game extends Canvas implements Runnable
 	private void update()
 	{
 		while(true)
-			render();		
+		{
+			render();
+			ball.update();
+		}	
 	}
 	
 	private void render()
@@ -65,5 +68,20 @@ public class Game extends Canvas implements Runnable
 		enemy.render(graphic);
 		ball.render(graphic);
 		buffer.show();
+	}
+	
+	public static Player getPlayer()
+	{
+		return player;
+	}
+	
+	public static Enemy getEnemy()
+	{
+		return enemy;
+	}
+	
+	public static void resetBall()
+	{
+		ball = new Ball();
 	}
 }

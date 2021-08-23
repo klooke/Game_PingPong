@@ -9,7 +9,7 @@ public class Player extends Entity
 		height = 10;
 		posX = (Game.FRAME_WIDTH / 2) - (width / 2);
 		posY = Game.FRAME_HEIGHT - (height*2);
-		speed = 10;
+		speed = 15;
 		controller = new PlayerController(this);
 	}
 	
@@ -21,7 +21,7 @@ public class Player extends Entity
 	public void moveX(short direction)
 	{
 		this.direction = direction;
-		if (onLimits())
+		if(onLimits())
 			posX += (direction * speed);
 	}
 	
