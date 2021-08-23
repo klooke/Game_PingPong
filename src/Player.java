@@ -20,6 +20,7 @@ public class Player extends Entity
 	public void moveX(short direction)
 	{
 		this.direction = direction;
+		
 		if(isCollideToWall())
 			posX += (direction * speed);
 	}

@@ -19,7 +19,8 @@ public class Enemy extends Entity
 	private void randomSpeed()
 	{
 		speed = new Random().nextInt(100) + 1;
-		if(speed > 50) 
+		
+		if(speed > 60) 
 			speed = 0.07;
 		else
 			speed = 0.01;
@@ -34,7 +35,8 @@ public class Enemy extends Entity
 	
 	private void directionBall()
 	{
-		double distance = Game.getBall().posX - bounds.getCenterX();		
+		double distance = Game.getBall().posX - bounds.getCenterX();
+		
 		if(distance > 0)
 			direction = Game.DIR_RIGHT;
 		else if(distance < 0)

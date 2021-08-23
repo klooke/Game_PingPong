@@ -12,13 +12,13 @@ public class Ball extends Entity
 		height = 10;
 		posX = (Game.FRAME_WIDTH / 2) - (width / 2);
 		posY = (Game.FRAME_HEIGHT / 2) - (height /2);
-		speed = 0.07;
+		speed = 0.1;
 		randomDirection();
 	}
 	
 	private void randomDirection()
 	{
-		directionAngle = new Random().nextInt(80) + 40;
+		directionAngle = new Random().nextInt(80) + 41;
 		directionX = Math.cos(Math.toRadians(directionAngle));
 		
 		if (directionY >= 0)
@@ -60,12 +60,12 @@ public class Ball extends Entity
 	{
 		if(bounds.getCenterY() >= Game.FRAME_HEIGHT)
 		{
-			System.out.println("Ponto do inimigo!");
+			Game.getEnemy().score++;
 			return true;
 		}
 		else if(bounds.getCenterY() <= 0)
 		{
-			System.out.println("Ponto do jogador!");
+			Game.getPlayer().score++;
 			return true;
 		}
 		

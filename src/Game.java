@@ -1,5 +1,7 @@
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -19,6 +21,7 @@ public class Game extends Canvas implements Runnable
 	private static Enemy enemy;
 	private static Ball ball;
 	private BufferStrategy buffer;
+	private static Graphics graphic;
 	
 	public static void main(String[] args)
 	{
@@ -62,13 +65,36 @@ public class Game extends Canvas implements Runnable
 	
 	private void render()
 	{
-		Graphics graphic = background.getGraphics();		
+		graphic = background.getGraphics();		
 		graphic = buffer.getDrawGraphics();
 		graphic.drawImage(background, 0, 0, null);		
-		player.render(graphic);
-		enemy.render(graphic);
-		ball.render(graphic);
+		player.render();
+		enemy.render();
+		ball.render();
+		renderScore();
+		graphic.dispose();
 		buffer.show();
+	}
+	
+	private void renderScore()
+	{
+		int sizeFont = 128*FRAME_SCALE;
+		int posXScoreHigh = 10;
+		int posXScore = sizeFont - (85*FRAME_SCALE);
+		int posYPlayerScore = sizeFont + (128*FRAME_SCALE);
+		int posYEnemyScore= sizeFont - 50;
+		graphic.setColor(new Color(255,255,255, 50));
+		graphic.setFont(new Font("Arial", Font.BOLD, sizeFont));
+		
+		if(enemy.score > 9)
+			graphic.drawString(Integer.toString(enemy.score), posXScoreHigh, posYEnemyScore);
+		else
+			graphic.drawString(Integer.toString(enemy.score), posXScore, posYEnemyScore);
+		
+		if(player.score > 9)
+			graphic.drawString(Integer.toString(player.score), posXScoreHigh, posYPlayerScore);
+		else
+			graphic.drawString(Integer.toString(player.score), posXScore, posYPlayerScore);
 	}
 	
 	public static Player getPlayer()
@@ -84,6 +110,11 @@ public class Game extends Canvas implements Runnable
 	public static Ball getBall()
 	{
 		return ball;
+	}
+	
+	public static Graphics getGraphic()
+	{
+		return graphic;
 	}
 	
 	public static void resetBall()
