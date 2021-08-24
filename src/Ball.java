@@ -4,7 +4,8 @@ public class Ball extends Entity
 {
 	private int directionAngle;
 	private double directionX;
-	private double directionY;
+	private double directionY;	
+	private long collideTime;
 	
 	public Ball()
 	{
@@ -49,9 +50,16 @@ public class Ball extends Entity
 	{
 		if(bounds.intersects(Game.getPlayer().bounds) || bounds.intersects(Game.getEnemy().bounds))
 		{
+			long oldCollideTime = collideTime;
+			collideTime = System.currentTimeMillis();
+			
+			if(oldCollideTime > 0)
+				return false;
+			
 			randomDirection();
 			return true;
-		}
+		}		
+		collideTime = 0;
 		
 		return false;
 	}

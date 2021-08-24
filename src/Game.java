@@ -64,16 +64,27 @@ public class Game extends Canvas implements Runnable
 	}
 	
 	private void render()
-	{
-		graphic = background.getGraphics();		
-		graphic = buffer.getDrawGraphics();
-		graphic.drawImage(background, 0, 0, null);		
-		player.render();
-		enemy.render();
-		ball.render();
+	{		
+		renderBackground();
+		renderEntities();
 		renderScore();
 		graphic.dispose();
 		buffer.show();
+	}
+	
+	private void renderBackground()
+	{
+		graphic = background.getGraphics();
+		graphic = buffer.getDrawGraphics();
+		graphic.drawImage(background, 0, 0, null);
+		graphic.drawLine(0, (FRAME_HEIGHT / 2), FRAME_WIDTH, (FRAME_HEIGHT / 2));
+	}
+	
+	private void renderEntities()
+	{
+		player.render();
+		enemy.render();
+		ball.render();		
 	}
 	
 	private void renderScore()
