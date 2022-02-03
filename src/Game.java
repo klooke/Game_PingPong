@@ -34,7 +34,7 @@ public class Game extends Canvas implements Runnable
 	{
 		graphic = buffer.getDrawGraphics();
 		graphic.drawImage(background, 0, 0, null);
-		graphic.drawLine(0, (Frame.HEIGHT / 2), Frame.WIDTH, (Frame.HEIGHT / 2));
+		graphic.drawLine(Frame.WIDTH / 2, 0, Frame.WIDTH / 2, Frame.HEIGHT); 
 	}
 	
 	private void renderEntities()
@@ -46,24 +46,16 @@ public class Game extends Canvas implements Runnable
 	
 	private void renderScore()
 	{
-		int sizeFont = 128 * Frame.SCALE;
-		int posXScoreHigh = 10;
-		int posXScore = sizeFont - (85 * Frame.SCALE);
-		int posYPlayerScore = sizeFont + (128 * Frame.SCALE);
-		int posYEnemyScore= sizeFont - 50;
+		int sizeFont = 14 * Frame.SCALE;
+		int posYScore = 5 + sizeFont;
+		int posXPlayerScore = (Frame.WIDTH / 2) - sizeFont;
+		int posXEnemyScore= (Frame.WIDTH / 2) + 20;
 
-		graphic.setColor(new Color(255,255,255, 50));
+		graphic.setColor(Color.WHITE);
 		graphic.setFont(new Font("Arial", Font.BOLD, sizeFont));
 		
-		if (enemy.score > 9)
-			graphic.drawString(Integer.toString(enemy.score), posXScoreHigh, posYEnemyScore);
-		else
-			graphic.drawString(Integer.toString(enemy.score), posXScore, posYEnemyScore);
-		
-		if (player.score > 9)
-			graphic.drawString(Integer.toString(player.score), posXScoreHigh, posYPlayerScore);
-		else
-			graphic.drawString(Integer.toString(player.score), posXScore, posYPlayerScore);
+		graphic.drawString(Integer.toString(enemy.score), posXPlayerScore, posYScore);	
+		graphic.drawString(Integer.toString(player.score), posXEnemyScore, posYScore);			
 	}
 	
 	private void update()

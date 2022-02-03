@@ -3,7 +3,7 @@ import java.util.Random;
 public class Ball extends Entity
 {
 	private int directionAngle;
-	private double directionY;	
+	private double directionX;	
 	private long collideTime;
 	
 	public Ball()
@@ -20,12 +20,12 @@ public class Ball extends Entity
 	private void randomDirection()
 	{
 		directionAngle = new Random().nextInt(80) + 41;
-		directionX = Math.cos(Math.toRadians(directionAngle));
+		directionY = Math.cos(Math.toRadians(directionAngle));
 		
-		if (directionY >= 0)
-			directionY = Math.sin(Math.toRadians(directionAngle));
+		if (directionX >= 0)
+			directionX = Math.sin(Math.toRadians(directionAngle));
 		else
-			directionY = Math.sin(Math.toRadians(-directionAngle));
+			directionX = Math.sin(Math.toRadians(-directionAngle));
 	}
 	
 	public void update()
@@ -39,10 +39,10 @@ public class Ball extends Entity
 	private void collision()
 	{
 		if (isCollideToWall()) 
-			directionX *= -1;
+			directionY *= -1;
 		
 		if (isCollideToEntities())
-			directionY *= -1;
+			directionX *= -1;
 		
 		if (isOutLimits())
 			Game.resetBall();
@@ -69,13 +69,13 @@ public class Ball extends Entity
 	
 	private boolean isOutLimits()
 	{
-		if(bounds.getCenterY() >= Frame.HEIGHT)
+		if(bounds.getCenterX() >= Frame.WIDTH)
 		{
 			Game.getEnemy().score++;
 
 			return true;
 		}
-		else if(bounds.getCenterY() <= 0)
+		else if(bounds.getCenterX() <= 0)
 		{
 			Game.getPlayer().score++;
 

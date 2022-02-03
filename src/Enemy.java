@@ -2,11 +2,11 @@ public class Enemy extends Entity
 {	
 	public Enemy()
 	{
-		width = (Frame.WIDTH / 5);
-		height = 10;
-		posX = (Frame.WIDTH / 2) - (width / 2);
-		posY = height;
-		speed = 1;
+		width = 10;
+		height = Frame.HEIGHT / 5;
+		posX = Frame.WIDTH - 15;
+		posY = Frame.HEIGHT / 2;
+		speed = 3;
 	}
 	
 	public void update()
@@ -20,16 +20,16 @@ public class Enemy extends Entity
 		directionBall();
 
 		if (isCollideToWall())
-			posX += directionX * speed;
+			posY += directionY * speed;
 	}
 	
 	private void directionBall()
 	{		
-		if (bounds.getCenterX() < Game.getBall().posX && Game.getBall().directionX > 0)
-			directionX = DIR_RIGHT;
-		else if (bounds.getCenterX() > Game.getBall().posX && Game.getBall().directionX < 0)
-			directionX = DIR_LEFT;
+		if (bounds.getCenterY() < Game.getBall().posY && Game.getBall().directionY > 0)
+			directionY = DIR_DOWN;
+		else if (bounds.getCenterY() > Game.getBall().posY && Game.getBall().directionY < 0)
+			directionY = DIR_UP;
 		else
-			directionX = 0;
+			directionY = 0;
 	}
 }

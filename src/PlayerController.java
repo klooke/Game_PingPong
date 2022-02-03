@@ -7,13 +7,13 @@ public class PlayerController implements KeyListener
 	{
 		switch (e.getKeyCode())
 		{
-			case KeyEvent.VK_LEFT:
-			case KeyEvent.VK_A:
-				Game.getPlayer().directionX = Entity.DIR_LEFT;
+			case KeyEvent.VK_UP:
+			case KeyEvent.VK_W:
+				Game.getPlayer().directionY = Entity.DIR_UP;
 				return;
-			case KeyEvent.VK_RIGHT:
-			case KeyEvent.VK_D:
-				Game.getPlayer().directionX = Entity.DIR_RIGHT;
+			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_S:
+				Game.getPlayer().directionY = Entity.DIR_DOWN;
 				return;
 		}
 	}
@@ -22,11 +22,11 @@ public class PlayerController implements KeyListener
 	{
 		switch (e.getKeyCode())
 		{
-			case KeyEvent.VK_LEFT:
-			case KeyEvent.VK_A:
-			case KeyEvent.VK_RIGHT:
-			case KeyEvent.VK_D:
-				Game.getPlayer().directionX = 0;
+			case KeyEvent.VK_UP:
+			case KeyEvent.VK_W:
+			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_S:
+				Game.getPlayer().directionY = 0;
 				return;
 		}
 	}

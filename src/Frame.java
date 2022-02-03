@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 public class Frame extends JFrame 
 {		
 	public static final int SCALE = 2;
-	public static final int WIDTH = 152 * SCALE,  HEIGHT = 274 * SCALE;
+	public static final int WIDTH = 274 * SCALE,  HEIGHT = 152 * SCALE;
 	public static final String TITLE = "Ping Pong";
 	
 	public Frame(Canvas canvas)

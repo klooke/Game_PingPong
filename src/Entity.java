@@ -4,12 +4,12 @@ import java.awt.Rectangle;
 
 public class Entity
 {
-	protected static final short DIR_LEFT = -1, DIR_RIGHT = 1;
+	protected static final short DIR_UP = -1, DIR_DOWN = 1;
 
 	protected double posX, posY;
 	protected int width, height;
 	protected Rectangle bounds;
-	protected double speed, directionX;
+	protected double speed, directionY;
 	protected int score;
 	
 	public void render()
@@ -25,14 +25,14 @@ public class Entity
 	{
 		if (this instanceof Player || this instanceof Enemy)
 		{
-			boolean isCollideRight = (directionX == DIR_RIGHT) && (bounds.getMaxX() < (Frame.WIDTH - 10));
-			boolean isCollideLeft = (directionX == DIR_LEFT) && (bounds.getMinX() > 10);
+			boolean isColliderDown = (directionY == DIR_DOWN) && (bounds.getMaxY() < (Frame.HEIGHT - 10));
+			boolean isColliderUP = (directionY == DIR_UP) && (bounds.getMinY() > 10);
 			
-			return isCollideRight || isCollideLeft;
+			return isColliderDown || isColliderUP;
 		}
 		else if (this instanceof Ball)
 		{
-			if (bounds.getMinX() <= 0 || bounds.getMaxX() >= Frame.WIDTH)
+			if (bounds.getMinY() <= 0 || bounds.getMaxY() >= Frame.HEIGHT)
 				return true;
 		}
 		

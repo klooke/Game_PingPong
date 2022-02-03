@@ -2,10 +2,10 @@ public class Player extends Entity
 {	
 	public Player()
 	{
-		width = (Frame.WIDTH / 5);
-		height = 10;
-		posX = (Frame.WIDTH / 2) - (width / 2);
-		posY = Frame.HEIGHT - (height*2);
+		width = 10;
+		height = Frame.HEIGHT / 5;
+		posX = 5;
+		posY = Frame.HEIGHT / 2;
 		speed = 4;
 	}
 
@@ -13,12 +13,12 @@ public class Player extends Entity
 	{
 		if (bounds == null) return;
 
-		moveX();
+		moveY();
 	}
 	
-	private void moveX()
+	private void moveY()
 	{		
 		if (isCollideToWall())
-			posX += directionX * speed;
+			posY += directionY * speed;
 	}
 }
