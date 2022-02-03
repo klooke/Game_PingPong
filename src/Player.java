@@ -6,9 +6,9 @@ public class Player extends Entity
 	{
 		width = (Frame.WIDTH / 5);
 		height = 10;
-		speed = 15;
 		posX = (Frame.WIDTH / 2) - (width / 2);
 		posY = Frame.HEIGHT - (height*2);
+		speed = 4;
 		controller = new PlayerController(this);
 	}
 	
@@ -16,12 +16,15 @@ public class Player extends Entity
 	{
 		return controller;
 	}
-	
-	public void moveX(short direction)
+
+	public void update()
 	{
-		directionX = direction;
-		
-		if(isCollideToWall())
-			posX += (direction * speed);
+		moveX();
+	}
+	
+	private void moveX()
+	{		
+		if (isCollideToWall())
+			posX += directionX * speed;
 	}
 }

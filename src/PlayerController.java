@@ -12,14 +12,30 @@ public class PlayerController implements KeyListener
 	
 	public void keyPressed(KeyEvent e)
 	{
-		int key = e.getKeyCode();
-		
-		if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) 
-			player.moveX(Entity.DIR_LEFT);		
-		else if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D)
-			player.moveX(Entity.DIR_RIGHT);		
+		switch (e.getKeyCode())
+		{
+			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_A:
+				player.directionX = Entity.DIR_LEFT;
+				return;
+			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_D:
+				player.directionX = Entity.DIR_RIGHT;
+				return;
+		}
 	}
 
-	public void keyReleased(KeyEvent e){}	
+	public void keyReleased(KeyEvent e)
+	{
+		switch (e.getKeyCode())
+		{
+			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_A:
+			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_D:
+				player.directionX = 0;
+				return;
+		}
+	}
 	public void keyTyped(KeyEvent e){}
 }

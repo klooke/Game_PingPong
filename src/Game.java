@@ -48,6 +48,7 @@ public class Game extends Canvas implements Runnable
 		while (true)
 		{
 			render();
+			player.update();
 			enemy.update();
 			ball.update();
 
