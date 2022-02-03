@@ -7,7 +7,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable
-{		
+{
+	private boolean isRunning = true;
 	private BufferedImage background = new BufferedImage(Frame.WIDTH, Frame.HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private static Player player = new Player();
 	private static PlayerController playerController = new PlayerController();
@@ -16,56 +17,17 @@ public class Game extends Canvas implements Runnable
 	private BufferStrategy buffer;
 	private static Graphics graphic;
 	
-	public static void main(String[] args)
-	{
-		Game game = new Game();
-		new Frame(game);
-		new Thread(game).start();
-	}
-	
 	public Game()
 	{		
 		setPreferredSize(new Dimension(Frame.WIDTH, Frame.HEIGHT));
 		addKeyListener(playerController);
 	}
-	
-	public void run() 
-	{
-		createBuffer();
-		requestFocus();
-		update();
-	}
-	
-	private void createBuffer()
-	{
-		if (buffer != null) return;
 
-		createBufferStrategy(3);		
-		buffer = getBufferStrategy();		
-	}
-	
-	private void update()
+	public static void main(String[] args)
 	{
-		while (true)
-		{
-			render();
-			player.update();
-			enemy.update();
-			ball.update();
-
-			try { Thread.sleep(1000/60); } 
-			catch (InterruptedException e) { e.printStackTrace(); }
-		}	
-	}
-	
-	private void render()
-	{		
-		renderBackground();
-		renderEntities();
-		renderScore();
-
-		graphic.dispose();
-		buffer.show();
+		Game game = new Game();
+		new Frame(game);
+		new Thread(game).start();
 	}
 	
 	private void renderBackground()
@@ -104,6 +66,48 @@ public class Game extends Canvas implements Runnable
 			graphic.drawString(Integer.toString(player.score), posXScore, posYPlayerScore);
 	}
 	
+	private void update()
+	{
+		player.update();
+		enemy.update();
+		ball.update();
+	}
+	
+	private void render()
+	{		
+		renderBackground();
+		renderEntities();
+		renderScore();
+
+		graphic.dispose();
+		buffer.show();
+	}
+		
+	private void createBuffer()
+	{
+		createBufferStrategy(3);		
+		buffer = getBufferStrategy();		
+	}
+		
+	private void loop()
+	{
+		while (isRunning)
+		{
+			update();
+			render();
+
+			try { Thread.sleep(1000/60); } 
+			catch (InterruptedException e) { e.printStackTrace(); }
+		}	
+	}
+
+	public void run() 
+	{
+		createBuffer();
+		requestFocus();
+		loop();
+	}
+
 	public static Player getPlayer()
 	{
 		return player;

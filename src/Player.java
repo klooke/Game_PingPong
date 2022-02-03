@@ -11,6 +11,8 @@ public class Player extends Entity
 
 	public void update()
 	{
+		if (bounds == null) return;
+
 		moveX();
 	}
 	

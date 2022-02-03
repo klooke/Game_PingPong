@@ -30,6 +30,8 @@ public class Ball extends Entity
 	
 	public void update()
 	{
+		if (bounds == null) return;
+
 		collision();
 		move();
 	}
