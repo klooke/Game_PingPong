@@ -10,6 +10,7 @@ public class Game extends Canvas implements Runnable
 {		
 	private BufferedImage background = new BufferedImage(Frame.WIDTH, Frame.HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private static Player player = new Player();
+	private static PlayerController playerController = new PlayerController();
 	private static Enemy enemy = new Enemy();
 	private static Ball ball = new Ball();
 	private BufferStrategy buffer;
@@ -25,7 +26,7 @@ public class Game extends Canvas implements Runnable
 	public Game()
 	{		
 		setPreferredSize(new Dimension(Frame.WIDTH, Frame.HEIGHT));
-		addKeyListener(player.getController());
+		addKeyListener(playerController);
 	}
 	
 	public void run() 

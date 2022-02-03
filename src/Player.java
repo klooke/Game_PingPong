@@ -1,7 +1,5 @@
 public class Player extends Entity
 {	
-	private PlayerController controller;
-	
 	public Player()
 	{
 		width = (Frame.WIDTH / 5);
@@ -9,12 +7,6 @@ public class Player extends Entity
 		posX = (Frame.WIDTH / 2) - (width / 2);
 		posY = Frame.HEIGHT - (height*2);
 		speed = 4;
-		controller = new PlayerController(this);
-	}
-	
-	public PlayerController getController()
-	{
-		return controller;
 	}
 
 	public void update()
