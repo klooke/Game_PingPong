@@ -97,6 +97,7 @@ public class Game extends Canvas implements Runnable
 	{
 		createBuffer();
 		requestFocus();
+		render();
 		loop();
 	}
 

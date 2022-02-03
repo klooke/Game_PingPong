@@ -12,7 +12,7 @@ public class Ball extends Entity
 		height = 10;
 		posX = (Frame.WIDTH / 2) - (width / 2);
 		posY = (Frame.HEIGHT / 2) - (height /2);
-		speed = 4;
+		speed = 6;
 
 		randomDirection();
 	}
@@ -30,8 +30,6 @@ public class Ball extends Entity
 	
 	public void update()
 	{
-		if (bounds == null) return;
-
 		collision();
 		move();
 	}
