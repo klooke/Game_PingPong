@@ -22,12 +22,10 @@ public class Enemy extends Entity
 	}
 	
 	private void directionBall()
-	{
-		double distance = Game.getBall().posX - bounds.getCenterX();
-		
-		if(distance > 0)
+	{		
+		if (bounds.getCenterX() < Game.getBall().posX && Game.getBall().directionX > 0)
 			directionX = DIR_RIGHT;
-		else if(distance < 0)
+		else if (bounds.getCenterX() > Game.getBall().posX && Game.getBall().directionX < 0)
 			directionX = DIR_LEFT;
 		else
 			directionX = 0;
