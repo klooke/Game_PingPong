@@ -4,18 +4,18 @@ import java.awt.Rectangle;
 
 public class Entity
 {
-	protected double posX;
-	protected double posY;
-	protected int width;
-	protected int height;
-	protected double speed;	
+	protected static final short DIR_LEFT = -1, DIR_RIGHT = 1;
+
+	protected double posX, posY;
+	protected int width, height;
 	protected Rectangle bounds;
-	protected int direction;
+	protected double speed, directionX;
 	protected int score;
 	
 	public void render()
 	{
 		Graphics graphic = Game.getGraphic();
+
 		graphic.setColor(Color.WHITE);
 		graphic.fillRect((int)posX, (int)posY, width, height);
 		bounds = new Rectangle((int)posX, (int)posY, width, height);
@@ -25,16 +25,15 @@ public class Entity
 	{
 		if (this instanceof Player || this instanceof Enemy)
 		{
-			boolean isCollideRight = (direction == Game.DIR_RIGHT) && (bounds.getMaxX() < (Game.FRAME_WIDTH - 10));
-			boolean isCollideLeft = (direction == Game.DIR_LEFT) && (bounds.getMinX() > 10);
+			boolean isCollideRight = (directionX == DIR_RIGHT) && (bounds.getMaxX() < (Frame.WIDTH - 10));
+			boolean isCollideLeft = (directionX == DIR_LEFT) && (bounds.getMinX() > 10);
+			
 			return isCollideRight || isCollideLeft;
 		}
 		else if (this instanceof Ball)
 		{
-			if(bounds.getMinX() <= 0 || bounds.getMaxX() >= Game.FRAME_WIDTH)
+			if (bounds.getMinX() <= 0 || bounds.getMaxX() >= Frame.WIDTH)
 				return true;
-			
-			return false;
 		}
 		
 		return false;

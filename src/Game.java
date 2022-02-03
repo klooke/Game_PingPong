@@ -7,19 +7,11 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable
-{	
-	public static final int FRAME_SCALE = 2;
-	public static final int FRAME_WIDTH = 152*FRAME_SCALE;
-	public static final int FRAME_HEIGHT = 274*FRAME_SCALE;
-	public static final String FRAME_TITLE = "Ping Pong";
-	public static final short DIR_LEFT = -1;
-	public static final short DIR_RIGHT = 1;
-	private static final long serialVersionUID = 1L;
-	
-	private BufferedImage background;
-	private static Player player;
-	private static Enemy enemy;
-	private static Ball ball;
+{		
+	private BufferedImage background = new BufferedImage(Frame.WIDTH, Frame.HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private static Player player = new Player();
+	private static Enemy enemy = new Enemy();
+	private static Ball ball = new Ball();
 	private BufferStrategy buffer;
 	private static Graphics graphic;
 	
@@ -32,34 +24,32 @@ public class Game extends Canvas implements Runnable
 	
 	public Game()
 	{		
-		setPreferredSize(new Dimension(FRAME_WIDTH, FRAME_HEIGHT));
-		background = new BufferedImage(FRAME_WIDTH, FRAME_HEIGHT, BufferedImage.TYPE_INT_RGB);
-		player = new Player();
+		setPreferredSize(new Dimension(Frame.WIDTH, Frame.HEIGHT));
 		addKeyListener(player.getController());
-		enemy = new Enemy();
-		ball = new Ball();
 	}
 	
 	public void run() 
 	{
 		createBuffer();
 		requestFocus();
-		loop();
+		update();
 	}
 	
 	private void createBuffer()
 	{
-		createBufferStrategy(3);
+		if (buffer != null) return;
+
+		createBufferStrategy(3);		
 		buffer = getBufferStrategy();		
 	}
 	
-	private void loop()
+	private void update()
 	{
-		while(true)
+		while (true)
 		{
 			render();
-			ball.update();
 			enemy.update();
+			ball.update();
 		}	
 	}
 	
@@ -68,16 +58,16 @@ public class Game extends Canvas implements Runnable
 		renderBackground();
 		renderEntities();
 		renderScore();
+
 		graphic.dispose();
 		buffer.show();
 	}
 	
 	private void renderBackground()
 	{
-		graphic = background.getGraphics();
 		graphic = buffer.getDrawGraphics();
 		graphic.drawImage(background, 0, 0, null);
-		graphic.drawLine(0, (FRAME_HEIGHT / 2), FRAME_WIDTH, (FRAME_HEIGHT / 2));
+		graphic.drawLine(0, (Frame.HEIGHT / 2), Frame.WIDTH, (Frame.HEIGHT / 2));
 	}
 	
 	private void renderEntities()
@@ -89,20 +79,21 @@ public class Game extends Canvas implements Runnable
 	
 	private void renderScore()
 	{
-		int sizeFont = 128*FRAME_SCALE;
+		int sizeFont = 128 * Frame.SCALE;
 		int posXScoreHigh = 10;
-		int posXScore = sizeFont - (85*FRAME_SCALE);
-		int posYPlayerScore = sizeFont + (128*FRAME_SCALE);
+		int posXScore = sizeFont - (85 * Frame.SCALE);
+		int posYPlayerScore = sizeFont + (128 * Frame.SCALE);
 		int posYEnemyScore= sizeFont - 50;
+
 		graphic.setColor(new Color(255,255,255, 50));
 		graphic.setFont(new Font("Arial", Font.BOLD, sizeFont));
 		
-		if(enemy.score > 9)
+		if (enemy.score > 9)
 			graphic.drawString(Integer.toString(enemy.score), posXScoreHigh, posYEnemyScore);
 		else
 			graphic.drawString(Integer.toString(enemy.score), posXScore, posYEnemyScore);
 		
-		if(player.score > 9)
+		if (player.score > 9)
 			graphic.drawString(Integer.toString(player.score), posXScoreHigh, posYPlayerScore);
 		else
 			graphic.drawString(Integer.toString(player.score), posXScore, posYPlayerScore);

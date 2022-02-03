@@ -3,7 +3,6 @@ import java.util.Random;
 public class Ball extends Entity
 {
 	private int directionAngle;
-	private double directionX;
 	private double directionY;	
 	private long collideTime;
 	
@@ -11,9 +10,10 @@ public class Ball extends Entity
 	{
 		width = 10;
 		height = 10;
-		posX = (Game.FRAME_WIDTH / 2) - (width / 2);
-		posY = (Game.FRAME_HEIGHT / 2) - (height /2);
-		speed = 0.1;
+		posX = (Frame.WIDTH / 2) - (width / 2);
+		posY = (Frame.HEIGHT / 2) - (height /2);
+		speed = 4;
+
 		randomDirection();
 	}
 	
@@ -36,13 +36,13 @@ public class Ball extends Entity
 	
 	private void collision()
 	{
-		if(isCollideToWall()) 
+		if (isCollideToWall()) 
 			directionX *= -1;
 		
-		if(isCollideToEntities())
+		if (isCollideToEntities())
 			directionY *= -1;
 		
-		if(isOutLimits())
+		if (isOutLimits())
 			Game.resetBall();
 	}
 	
@@ -53,10 +53,11 @@ public class Ball extends Entity
 			long oldCollideTime = collideTime;
 			collideTime = System.currentTimeMillis();
 			
-			if(oldCollideTime > 0)
+			if (oldCollideTime > 0)
 				return false;
 			
 			randomDirection();
+
 			return true;
 		}		
 		collideTime = 0;
@@ -66,14 +67,16 @@ public class Ball extends Entity
 	
 	private boolean isOutLimits()
 	{
-		if(bounds.getCenterY() >= Game.FRAME_HEIGHT)
+		if(bounds.getCenterY() >= Frame.HEIGHT)
 		{
 			Game.getEnemy().score++;
+
 			return true;
 		}
 		else if(bounds.getCenterY() <= 0)
 		{
 			Game.getPlayer().score++;
+
 			return true;
 		}
 		
@@ -82,7 +85,7 @@ public class Ball extends Entity
 	
 	private void move()
 	{
-		posX += directionX*speed;
-		posY += directionY*speed;
+		posX += directionX * speed;
+		posY += directionY * speed;
 	}
 }

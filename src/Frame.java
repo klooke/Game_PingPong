@@ -3,16 +3,18 @@ import java.awt.Canvas;
 import javax.swing.JFrame;
 
 public class Frame extends JFrame 
-{
-	private static final long serialVersionUID = 1L;
+{		
+	public static final int SCALE = 2;
+	public static final int WIDTH = 152 * SCALE,  HEIGHT = 274 * SCALE;
+	public static final String TITLE = "Ping Pong";
 	
 	public Frame(Canvas canvas)
 	{
-		this.setTitle(Game.FRAME_TITLE);
-		this.add(canvas);
+		this.setTitle(TITLE);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.pack();	
+		this.add(canvas);
+		this.pack();
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}

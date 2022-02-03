@@ -15,9 +15,9 @@ public class PlayerController implements KeyListener
 		int key = e.getKeyCode();
 		
 		if(key == KeyEvent.VK_LEFT || key == KeyEvent.VK_A) 
-			player.moveX(Game.DIR_LEFT);		
+			player.moveX(Entity.DIR_LEFT);		
 		else if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_D)
-			player.moveX(Game.DIR_RIGHT);		
+			player.moveX(Entity.DIR_RIGHT);		
 	}
 
 	public void keyReleased(KeyEvent e){}	
